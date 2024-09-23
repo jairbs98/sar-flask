@@ -10,9 +10,9 @@ def ejecutar_query(query, values=None, fetch_results=True, commit=False):
         db_functions.close()
 
 
-def guardar_recinto(name, address):
-    query = "SELECT * FROM proc_guardar_recinto (%s, %s)"
-    values = (name, address)
+def guardar_recinto(name, address, map):
+    query = "SELECT * FROM proc_guardar_recinto (%s, %s, %s)"
+    values = (name, address, map)
     ejecutar_query(query, values)
 
 
