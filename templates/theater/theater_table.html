@@ -1,0 +1,37 @@
+{% block content %}
+
+<div>
+    <div class="table-container">
+        <table class="styled-table theater">
+            <thead class="c-th">
+            <tr>
+                <th class="column-id">{{ header_id }}</th>
+                <th class="column-name">{{ header_name }}</th>
+                <th class="column-address">{{ header_address }}</th>
+                <th class="column-config">{{ header_config }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for recinto in pag.recintos %}
+            <tr>
+                <td>{{ recinto[0] }}</td>
+                <td>{{ recinto[1] }}</td>
+                <td>{{ recinto[2] }}</td>
+                <td>
+                    <form method="get" action="{{ url_for('detalle_recinto', recinto_id=recinto[0]) }}">
+                        <button type="submit" class="config-button">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        {{ pag.pagination.links }}
+    </div>
+</div>
+
+{% endblock %}

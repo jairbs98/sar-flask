@@ -1,0 +1,35 @@
+{% extends 'dual_base.html' %}
+
+{% block content_left %}
+<article class="details-container c3">
+    <div>
+        <h1 class="custom-title">{{ title_create_version }} {{ detalles_recinto.nombre}}</h1>
+    </div>
+    <form action="{{ url_for('guardar_version_recinto', recinto_id=detalles_recinto.id) }}" method="post"
+          enctype="multipart/form-data">
+        <div class="horizontal-container">
+            <div class="form-elements-container">
+                <label class="lbl-spacing" for="nom_version">{{ label_name }}</label>
+                <input id="nom_version" class="custom-input" type="text" name="nom_version"
+                       placeholder="{{ placeholder_name }}" autocomplete="off" required>
+            </div>
+            <div class="form-elements-container">
+                <label class="lbl-spacing" for="svg_recinto">{{ label_svg }}</label>
+                <input id="svg_recinto" class="custom-file-input" type="file" name="svg_recinto" accept=".svg" required
+                       onchange="mostrarPrevisualizacion()">
+            </div>
+            <input class="save-button" type="submit" value="{{ button_save }}">
+        </div>
+    </form>
+</article>
+
+<a id="return_button"
+   href="{{ url_for('detalle_recinto', recinto_id=detalles_recinto.id) }}"
+   class="custom-button">
+    <i class="fas fa-arrow-left"></i></a>
+
+{% endblock %}
+
+{% block content_right %}
+<div id="preview-container" class="preview-container"></div>
+{% endblock %}

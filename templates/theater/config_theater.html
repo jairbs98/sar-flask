@@ -1,0 +1,11 @@
+{% extends 'dual_base.html' %}
+
+{% block content_left %}
+{% include 'theater/form_edit_theater.html' %}
+{% include 'theater_versions/theater_versions_table.html' %}
+{% endblock %}
+
+{% block content_right %}
+    {{ detalles_recinto['mapa']|safe }}
+<!--<button id="downloadBtn" class="download-button">{{ button_download }}</button>-->
+{% endblock %}

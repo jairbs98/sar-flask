@@ -1,0 +1,15 @@
+@import '../utils/colors.css';
+
+.custom-title {
+  color: var(--color-title);
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.custom-subtitle {
+  color: var(--color-title);
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+}

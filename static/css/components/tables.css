@@ -1,0 +1,194 @@
+.styled-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.styled-table th,
+.styled-table td {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.styled-table tr:not(:last-child) {
+  border-bottom: 1px solid #202122;
+}
+
+.styled-table td:not(:last-child) {
+  border-right: 1px solid #202122;
+}
+
+/* Estilos para las columnas de la tabla de recinto */
+
+.styled-table.theater .column-id {
+  width: 10%;
+}
+
+.styled-table.theater .column-name {
+  width: 30%;
+}
+
+.styled-table.theater .column-address {
+  width: 55%;
+}
+
+.styled-table.theater .column-config {
+  width: 5%;
+}
+
+/* Estilos para las columnas de la tabla de versiones de recinto */
+
+.styled-table.theater-version .column-id {
+  width: 10%;
+}
+
+.styled-table.theater-version .column-name {
+  width: 40%;
+}
+
+.styled-table.theater-version .column-date {
+  width: 35%;
+}
+
+.styled-table.theater-version .column-config {
+  width: 5%;
+}
+
+/* Estilos para las columnas de la tabla de zonas */
+
+.styled-table.theater-area .column-id {
+  width: 10%;
+}
+
+.styled-table.theater-area .column-name {
+  width: 60%;
+}
+
+.styled-table.theater-area .column-date {
+  width: 10%;
+}
+
+.styled-table.theater-area .column-svg-id {
+  width: 15%;
+}
+
+.styled-table.theater-area .column-config {
+  width: 5%;
+}
+
+/* Estilos para las columnas de la tabla de zonas */
+
+.styled-table.theater-section .column-id {
+  width: 10%;
+}
+
+.styled-table.theater-section .column-name {
+  width: 40%;
+}
+
+.styled-table.theater-section .column-id-svg {
+  width: 15%;
+}
+
+.styled-table.theater-section .column-capacity {
+  width: 15%;
+}
+
+.styled-table.theater-section .column-status {
+  width: 15%;
+}
+
+.styled-table.theater-section .column-config {
+  width: 5%;
+}
+
+/* Estilos generales para la paginación */
+
+.pagination {
+  appearance: none;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 1em;
+  --bs-pagination-active-bg: transparent !important;
+  --bs-pagination-active-border-color: transparent !important;
+  --bs-pagination-bg: transparent !important;
+  --bs-pagination-disabled-bg: transparent !important;
+  --bs-pagination-disabled-border-color: none !important;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 5px;
+  color: #c7c8c9;
+  font-size: 1em;
+}
+
+.pagination li a {
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #202122;
+  color: #c7c8c9;
+  /* Cambiado a gris */
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.pagination li.active a {
+  background-color: #202122;
+  color: #fff;
+  border-color: black;
+}
+
+.pagination li a:hover {
+  background-color: #c7c8c9;
+  color: #28292a;
+}
+
+.pagination .disabled a {
+  color: #999;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Opcional: Estilos para los bordes */
+.pagination .bordered {
+  border: 1px solid black;
+  /* Cambiado a negro */
+  border-radius: 3px;
+}
+
+/* Opcional: Estilos para el botón de "anterior" y "siguiente" */
+.pagination .prev-next {
+  margin-right: 5px;
+}
+
+.pagination .prev-next a {
+  padding: 8px 12px;
+  border: 1px solid black;
+  /* Cambiado a negro */
+  color: #c7c8c9;
+  /* Cambiado a gris */
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.pagination .prev-next a:hover {
+  background-color: #eee;
+}
+
+.pagination .prev-next.disabled a {
+  color: #c7c8c9;
+  /* Cambiado a gris */
+  pointer-events: none;
+  cursor: default;
+}
+
+.color-bar {
+  width: 100%;
+  /* Ancho de la barra de color */
+  height: 1em;
+  /* Altura de la barra de color */
+  border-radius: 0.25em;
+  /* Borde redondeado opcional */
+}

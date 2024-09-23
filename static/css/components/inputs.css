@@ -1,0 +1,144 @@
+@import '../utils/colors.css';
+
+.custom-input {
+  appearance: none;
+  padding: 0.35em 1em;
+  border: none;
+  background-color: var(--color-input-background);
+  border-radius: 2em;
+  width: 100%;
+  font-size: 0.85em;
+
+  &:disabled {
+    opacity: 90%;
+  }
+}
+
+/* Estilo para el input tipo color */
+.custom-color-input {
+  appearance: none;
+  padding: 0.25em 1em;
+  border: none;
+  background-color: var(--color-input-background);
+  border-radius: 2em;
+  width: 100%;
+}
+
+.custom-color-input::-webkit-color-swatch {
+  border: none;
+  /* Quitar el borde del desplegable */
+  border-radius: 0.5em;
+  /* Aplicar borde redondeado */
+  width: 3em;
+}
+
+.custom-color-input::-moz-color-swatch {
+  border: none;
+  /* Quitar el borde del desplegable */
+  border-radius: 0.5em;
+  /* Aplicar borde redondeado */
+  width: 3em;
+}
+
+.custom-color-input:disabled {
+  opacity: 90%;
+  background-color: var(--color-input-background-disabled);
+  color: var(--color-input-text-disabled);
+  pointer-events: none;
+}
+
+.custom-file-input {
+  appearance: none;
+  border-radius: 2em;
+  padding: 0.35em 1em;
+  background-color: var(--color-input-background);
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.75em;
+}
+
+.custom-file-input::file-selector-button {
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+}
+
+.custom-file-input:disabled {
+  opacity: 90%;
+  background-color: var(--color-input-background-disabled);
+  color: var(--color-input-text-disabled);
+  pointer-events: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 3em;
+  /* Ancho del switch */
+  height: 1.85em;
+  /* Alto del switch */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 1em;
+  /* Radio de los bordes del switch */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.5em;
+  /* Altura de la bolita */
+  width: 1.5em;
+  /* Ancho de la bolita */
+  left: 0.1875em;
+  /* Espaciado izquierdo de la bolita */
+  bottom: 0.1875em;
+  /* Espaciado inferior de la bolita */
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  /* Radio de los bordes de la bolita */
+}
+
+input:checked+.slider {
+  background-color: #396095;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #396095;
+}
+
+input:checked+.slider:before {
+  transform: translateX(1em);
+  /* Distancia de desplazamiento de la bolita al estar activada */
+}
+
+/* Cambios para estado deshabilitado */
+
+.switch input:disabled+.slider {
+  background-color: #ddd;
+  /* Color de fondo del switch cuando está deshabilitado */
+  cursor: not-allowed;
+  /* Cambio de cursor cuando el switch está deshabilitado */
+}
+
+.switch input:disabled+.slider:before {
+  background-color: #aaa;
+  /* Color de la bolita cuando el switch está deshabilitado */
+}

@@ -1,0 +1,46 @@
+{% block content %}
+<article class="details-container c3">
+    <h1 class="custom-title">{{ title_detail }} {{ detalles_zona.nombre_zona }}</h1>
+    <form id="edit_form" action="{{ url_for('editar_zona', id_zona=detalles_zona.id_zona) }}" method="post">
+        <div class="horizontal-container">
+            <div class="form-elements-container">
+                <label for="edit_area_name" class="lbl-spacing">{{ label_name }}</label>
+                <input id="edit_area_name" class="custom-input" type="text" name="edit_area_name" autocomplete="off"
+                       value="{{ detalles_zona.nombre_zona }}" disabled>
+            </div>
+
+            <div class="form-elements-container">
+                <label for="edit_area_color" class="lbl-spacing">{{ label_color }}</label>
+                <input id="edit_area_color" class="custom-color-input" type="color" name="edit_area_color"
+                       value="{{ detalles_zona.color_zona }}" disabled>
+            </div>
+
+            <label for="edit_status">{{ label_status }}</label>
+            <label class="switch">
+                <input id="edit_status" type="checkbox" name="edit_status" {% if detalles_zona.estatus_zona %} checked
+                       {% endif %} disabled>
+                <span class="slider"></span>
+            </label>
+            <input type="hidden" id="edit_status_hidden" name="edit_status" value="">
+
+            <input id="edit_button" class="save-button edit-button" type="submit" value="Guardar" disabled>
+        </div>
+    </form>
+    <div>
+        <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
+    </div>
+
+    <a id="return_button"
+       href="{{ url_for('detalle_version_recinto', version_id=detalles_zona.id_version_recinto) }}"
+       class="custom-button">
+        <i class="fas fa-arrow-left"></i></a>
+
+</article>
+
+<div>
+    <a id="theater_versions"
+       href="{{ url_for('crear_seccion', id_zona=detalles_zona.id_zona) }}"
+       class="return-button">{{ button_create_section }}</a>
+</div>
+
+{% endblock %}

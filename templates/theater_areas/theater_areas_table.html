@@ -1,0 +1,41 @@
+{% block content %}
+
+<div>
+    <div class="table-container">
+        <table id="theater_versions" class="styled-table theater-area">
+            <thead class="c-th">
+            <tr>
+                <th class="column-id">{{ header_id }}</th>
+                <th class="column-name">{{ header_name }}</th>
+                <th class="column-date">{{ header_color }}</th>
+                <th class="column-svg-id">{{ header_status }}</th>
+                <th class="column-config">{{ header_config }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for zona in data_zonas.zonas %}
+            <tr>
+                <td>{{ zona[0] }}</td>
+                <td>{{ zona[2] }}</td>
+                <td>
+                    <div class="color-bar" style="background-color: {{ zona[3] }}"></div>
+                </td>
+                <td>{{ zona[5] }}</td>
+                <td>
+                    <form method="get" action="{{ url_for('detalle_zonas', id_zona=zona[0]) }}">
+                        <button type="submit" class="config-button">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        {{ data_zonas.pagination.links }}
+    </div>
+</div>
+
+{% endblock %}

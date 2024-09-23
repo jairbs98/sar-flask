@@ -1,0 +1,36 @@
+{% block content %}
+<article class="details-container c3">
+    <h2 class="custom-title">{{ title_detail }} {{ detalles_recinto.nombre }}</h2>
+    <form id="edit_form" action="{{ url_for('editar_recinto', recinto_id=detalles_recinto.id) }}" method="post">
+        <div class="horizontal-container">
+            <div class="form-elements-container">
+                <label for="edit_name" class="lbl-spacing">{{ label_name }}</label>
+                <input id="edit_name" class="custom-input" type="text" name="edit_name" autocomplete="off"
+                       value="{{ detalles_recinto.nombre }}" disabled>
+            </div>
+            <div class="form-elements-container">
+                <label for="edit_address" class="lbl-spacing">{{ label_address }}</label>
+                <input id="edit_address" class="custom-input" type="text" name="edit_address" autocomplete="off"
+                       value="{{ detalles_recinto.direccion }}" disabled>
+            </div>
+            <div class="form-elements-container">
+                <label for="add_map" class="lbl-spacing">{{ label_map }}</label>
+                <input id="add_map" class="custom-input" type="text" name="add_map" autocomplete="off"
+                       value="{{ detalles_recinto.mapa }}" disabled>
+            </div>
+            <input id="edit_button" class="save-button edit-button" type="submit" value="{{ button_save }}" disabled>
+        </div>
+    </form>
+    <div>
+        <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
+    </div>
+    <a id="return_button"
+       href="{{ url_for('index') }}"
+       class="custom-button">
+        <i class="fas fa-arrow-left"></i></a>
+</article>
+<div>
+    <a id="theater_versions" href="{{ url_for('versiones_recinto', recinto_id=detalles_recinto.id) }}"
+       class="return-button">{{ button_create_version }}</a>
+</div>
+{% endblock %}

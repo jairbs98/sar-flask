@@ -1,0 +1,28 @@
+:root {
+    --color-primary: #1f1f1f;
+    --color-secondary: #323437;
+    --color-title: #c7c8c9;
+    --color-text: #c7c8c9;
+    --color-background-svg: #b3b4b5;
+    --color-input-background: #ffffff;
+    --color-input-background-disabled: #f0f0f0;
+    --color-input-text-disabled: #3e3e3f;
+    --color-button-background: #234E89;
+    --color-button-hover: #4b4c4d;
+}
+
+.c1 {
+    background-color: #1f1f1f;
+}
+
+.c2 {
+    background-color: #323437;
+}
+
+.c3 {
+    background-color: #28292a;
+}
+
+.c-th {
+    background-color: #28292a;
+}

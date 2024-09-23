@@ -1,0 +1,50 @@
+{% block content %}
+
+<div>
+    <div class="table-container">
+        <table id="theater_versions" class="styled-table theater-section">
+            <thead class="c-th">
+            <tr>
+                <th class="column-id">{{ header_id }}</th>
+                <th class="column-name">{{ header_name }}</th>
+                <th class="column-id-svg">{{ header_id_svg }}</th>
+                <th class="column-capacity">{{ header_capacity }}</th>
+                <th class="column-status">{{ header_status }}</th>
+                <th class="column-config">{{ header_config }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for seccion in data.secciones %}
+            <tr>
+                <td>{{ seccion[0] }}</td>
+                <td>{{ seccion[1] }}</td>
+                <td>{{ seccion[2] }}</td>
+                <td>{{ seccion[3] }}</td>
+                <td>{{ seccion[6] }}</td>
+                <td>
+                    <div class="dropdown" onclick="toggleDropdown(event)">
+                        <button class="config-button">
+                            <i id="gear_icon" class="fas fa-cog"></i>
+                        </button>
+                        <div id="dropdownMenu" class="dropdown-content">
+                            <a href="{{ url_for('detalle_seccion', id_seccion=seccion[0]) }}">
+                                <i class="fas fa-cog"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        {{ data.pagination.links }}
+    </div>
+</div>
+
+{% endblock %}

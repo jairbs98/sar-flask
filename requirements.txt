@@ -1,0 +1,10 @@
+flask==3.0.2
+flask-bootstrap
+flask-wtf
+flask-testing
+blinker==1.7.0
+firebase-admin
+flask_login
+flask-paginate
+Flask-SQLALchemy
+psycopg2
