@@ -8,10 +8,10 @@
     border: none;
     border-radius: 2em;
     cursor: pointer;
-}
 
-.save-button:hover {
-    background-color: #326fc3;
+    &:hover {
+        background-color: #326fc3;
+    }
 }
 
 .custom-button {
@@ -27,32 +27,33 @@
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-}
 
-.custom-button:hover {
-    background-color: var(--color-button-hover);
+    &:hover {
+        background-color: var(--color-button-hover);
+    }
 }
 
 .edit-button {
     display: none;
+
+    &.edit-button-visible {
+        display: inline-block;
+    }
 }
 
-.edit-button-visible {
-    display: inline-block;
-}
+
 
 .config-button {
     background-color: #28292a;
     color: #c7c8c9;
-    width: 3em;
-    padding: 0.25em 1em;
+    width: 2em;
+    padding: 0.25em;
     border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-}
+    border-radius: 2em;
 
-.config-button:hover {
-    background-color: var(--color-button-hover);
+    &:hover {
+        background-color: var(--color-button-hover);
+    }
 }
 
 .return-button {
@@ -64,10 +65,10 @@
     border-radius: 2em;
     border: none;
     cursor: pointer;
-}
 
-.return-button:hover {
-    background-color: #326fc3;
+    &:hover {
+        background-color: #326fc3;
+    }
 }
 
 .download-button {
@@ -79,11 +80,12 @@
     border-radius: 0.5em;
     border: none;
     cursor: pointer;
+
+    &:hover {
+        background-color: #326fc3;
+    }
 }
 
-.download-button:hover {
-    background-color: #326fc3;
-}
 
 .chevron-down-button {
     border-radius: 50%;
@@ -94,43 +96,41 @@
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-}
 
-.chevron-down-button:hover {
-    background-color: var(--color-button-hover);
+    &:hover {
+        background-color: var(--color-button-hover);
+    }
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
-}
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    background-color: #c7c8c9;
-    /* min-width: 160px; */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
-    /* padding: 8px 8px 8px 8px; */
-    overflow: hidden;
-    border-radius: 4px;
-    width: 3em;
-    top: calc(100% + 0.5em);
-    /* Posición debajo del botón */
-    a {
-    color: #1f1f1f;
-    padding: 8px;
-    text-decoration: none;
-    display: block;
-}
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        background-color: #c7c8c9;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+        overflow: hidden;
+        border-radius: 2em;
+        width: 2em;
+        top: calc(100% + 0.5em);
 
-}
+        /* Posición debajo del botón */
+        a {
+            color: #1f1f1f;
+            padding: 8px;
+            text-decoration: none;
+            display: block;
 
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
+            &:hover {
+                background-color: #f2f2f2;
+            }
+        }
+    }
 
-.show {
-    display: block;
+    .show {
+        display: block;
+    }
 }
