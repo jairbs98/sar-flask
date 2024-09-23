@@ -1,8 +1,8 @@
 DB_CONFIG = {
     'driver': 'postgresql',
-    'hostname': 'localhost',
+    'hostname': 'bd-sar-container',
     'username': 'postgres',
-    'password': '123',
+    'password': 'admin',
     'database': 'svg',
-    'port': '5433',
+    'port': '5432',
 }
