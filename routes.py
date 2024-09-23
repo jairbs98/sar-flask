@@ -64,8 +64,9 @@ def guardar_recinto_principal():
     try:
         name = request.form['name']
         address = request.form['address']
+        map = request.form['map']
         flash('Recinto guardado exitosamente', 'success')
-        guardar_recinto(name, address)
+        guardar_recinto(name, address, map)
 
         return redirect(url_for('index'))
     except KeyError as e:
