@@ -42,6 +42,7 @@ def inject_global_variables():
         # ...
         'placeholder_name': 'Ingrese el nombre',
         'placeholder_address': 'Ingrese la dirección',
+        'placeholder_map': 'Ingrese el mapa',
         'placeholder_id_svg': 'Ingrese el ID del SVG',
         'placeholder_capacity': 'Ingrese el aforo',
     }
