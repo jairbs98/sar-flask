@@ -271,7 +271,7 @@ def editar_detalle_seccion(id_seccion):
 
 
 def index():
-    recintos, pagination = get_paginated_data(10, obtener_recintos_listado, obtener_total_recintos)
+    recintos, pagination = get_paginated_data(5, obtener_recintos_listado, obtener_total_recintos)
 
     pag = {
         'recintos': recintos,

@@ -26,11 +26,27 @@
 
 <body>
     <div class="app-container">
-        {% include 'app_header.html' %}
-        <div class="s-details-container">
-            {% block content %}{% endblock %}
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="custom-sidebar">
+            <h4>Menú</h4>
+            <ul class="list-unstyled">
+                <li><a href="#">Opción 1</a></li>
+                <li><a href="#">Opción 2</a></li>
+                <li><a href="#">Opción 3</a></li>
+                <li><a href="#">Opción 4</a></li>
+            </ul>
+        </div>
+        <div class="app-content">
+            {% include 'app_header.html' %}
+
+            <!-- Contenido Principal -->
+            <div class="s-details-container" style="flex-grow: 1; padding: 15px;">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </div>
+
     <div id="notification-container">
         {% block notifications %}
         {% with messages = get_flashed_messages() %}
