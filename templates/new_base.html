@@ -29,9 +29,11 @@
 
         <!-- Sidebar -->
         <div id="sidebar" class="custom-sidebar">
-            <h4>Menú</h4>
+            <button id="toggle-sidebar-btn" class="sidebar-toggle">
+                <i class="fas fa-bars sidebar-icon"></i>
+            </button>
             <ul class="list-unstyled">
-                <li><a href="#">Opción 1</a></li>
+                <li><a href="{{ url_for('index') }}">Recintos</a></li>
                 <li><a href="#">Opción 2</a></li>
                 <li><a href="#">Opción 3</a></li>
                 <li><a href="#">Opción 4</a></li>
@@ -41,7 +43,7 @@
             {% include 'app_header.html' %}
 
             <!-- Contenido Principal -->
-            <div class="s-details-container" style="flex-grow: 1; padding: 15px;">
+            <div class="s-details-container">
                 {% block content %}{% endblock %}
             </div>
         </div>
@@ -62,5 +64,13 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <script>
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
 
 </html>
