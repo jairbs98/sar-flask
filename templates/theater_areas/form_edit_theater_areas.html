@@ -1,6 +1,6 @@
 {% block content %}
 <article class="details-container c3">
-    <h1 class="custom-title">{{ title_detail }} {{ detalles_zona.nombre_zona }}</h1>
+    <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_zona.nombre_zona }}</h1>
     <form id="edit_form" action="{{ url_for('editar_zona', id_zona=detalles_zona.id_zona) }}" method="post">
         <div class="horizontal-container">
             <div class="form-elements-container">

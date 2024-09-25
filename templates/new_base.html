@@ -27,36 +27,14 @@
 
 <body>
     <div class="app-container">
-        <div id="sidebar" class="custom-sidebar">
-            <button id="toggle-sidebar-btn" class="sidebar-toggle">
-                <i class="fas fa-bars sidebar-icon"></i>
-            </button>
-            <ul class="sidebar-menu">
-                <li>
-                    <a href="{{ url_for('index') }}">
-                        <img src="{{ url_for('static', filename='images/icon-theaters.svg') }}" alt="Icon"
-                            class="menu-icon">
-                        <span class="menu-text">Recintos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url_for('home') }}">
-                        <img src="{{ url_for('static', filename='images/icon-report.svg') }}" alt="Icon"
-                            class="menu-icon">
-                        <span class="menu-text">Reportes</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="app-content">
-            {% include 'app_header.html' %}
-
+        {% include 'sidebar.html' %}
+        <div class="app-content flex-column">
+            {% include 'header.html' %}
             <div class="s-details-container">
                 {% block content %}{% endblock %}
             </div>
         </div>
     </div>
-
 
     <div id="notification-container">
         {% block notifications %}
@@ -71,15 +49,16 @@
         {% endwith %}
         {% endblock %}
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
-    <script>
-        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
-        const sidebar = document.getElementById('sidebar');
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+<script>
+    const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+    const sidebar = document.getElementById('sidebar');
 
-        toggleSidebarBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-        });
-    </script>
+    toggleSidebarBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+    });
+</script>
 
 </html>

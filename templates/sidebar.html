@@ -1,0 +1,21 @@
+<div id="sidebar" class="custom-sidebar">
+    <button id="toggle-sidebar-btn" class="sidebar-toggle">
+        <i class="fas fa-bars sidebar-icon"></i>
+    </button>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/icon-theaters.svg') }}" alt="Icon"
+                    class="menu-icon">
+                <span class="menu-text">Recintos</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/icon-report.svg') }}" alt="Icon"
+                    class="menu-icon">
+                <span class="menu-text">Reportes</span>
+            </a>
+        </li>
+    </ul>
+</div>

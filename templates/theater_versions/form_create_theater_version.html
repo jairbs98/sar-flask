@@ -3,7 +3,7 @@
 {% block content_left %}
 <article class="details-container c3">
     <div>
-        <h1 class="custom-title">{{ title_create_version }} {{ detalles_recinto.nombre}}</h1>
+        <h1 class="custom-subtitle">{{ title_create_version }} {{ detalles_recinto.nombre}}</h1>
     </div>
     <form action="{{ url_for('guardar_version_recinto', recinto_id=detalles_recinto.id) }}" method="post"
           enctype="multipart/form-data">
