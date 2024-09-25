@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     {% for stylesheet in [
@@ -12,6 +13,7 @@
     'components/modals.css',
     'components/tables.css',
     'components/titles.css',
+    'components/sidebar.css',
     'utils/colors.css',
     ] %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/' + stylesheet) }}">
@@ -22,25 +24,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <title>{{ title_system }}</title>
 </head>
+
 <body>
-<div class="app-container">
-    <div class="s-details-container">
-        {% block content %}{% endblock %}
+    <div class="app-container">
+        {% include 'sidebar.html' %}
+        <div class="app-content flex-column">
+            {% include 'header.html' %}
+            <div class="s-details-container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
-</div>
-<div id="notification-container">
-    {% block notifications %}
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="floating-notification">
-        {% for message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %}
+
+    <div id="notification-container">
+        {% block notifications %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="floating-notification">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% endblock %}
     </div>
-    {% endif %}
-    {% endwith %}
-    {% endblock %}
-</div>
+</body>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+<script>
+    const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleSidebarBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+    });
+</script>
+
 </html>

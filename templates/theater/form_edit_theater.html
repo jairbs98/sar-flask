@@ -1,6 +1,6 @@
 {% block content %}
 <article class="details-container c3">
-    <h2 class="custom-title">{{ title_detail }} {{ detalles_recinto.nombre }}</h2>
+    <h2 class="custom-subtitle">{{ title_detail }} {{ detalles_recinto.nombre }}</h2>
     <form id="edit_form" action="{{ url_for('editar_recinto', recinto_id=detalles_recinto.id) }}" method="post">
         <div class="horizontal-container">
             <div class="form-elements-container">
