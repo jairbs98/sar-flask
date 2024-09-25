@@ -1,6 +1,6 @@
 {% block content_left %}
 <article class="details-container c3">
-    <h1 class="custom-title">{{ title_detail }} {{ detalles_seccion.nom_seccion }}</h1>
+    <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_seccion.nom_seccion }}</h1>
     <form id="edit_form" action="{{ url_for('guardar_seccion', id_zona=detalles_seccion.id_zona) }}" method="post"
           enctype="multipart/form-data">
         <div class="horizontal-container">

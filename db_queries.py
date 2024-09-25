@@ -36,10 +36,10 @@ def obtener_detalles_recinto(recinto_id):
     if detalles_recinto and len(detalles_recinto) >= 1:
         detalle_recinto_tupla = detalles_recinto[0]
         return {
-            'id': detalle_recinto_tupla[0],
-            'nombre': detalle_recinto_tupla[1],
-            'direccion': detalle_recinto_tupla[2],
-            'mapa': detalle_recinto_tupla[5]
+            "id": detalle_recinto_tupla[0],
+            "nombre": detalle_recinto_tupla[1],
+            "direccion": detalle_recinto_tupla[2],
+            "mapa": detalle_recinto_tupla[5],
         }
     else:
         return None
@@ -52,11 +52,11 @@ def obtener_detalles_version_recinto(id_version):
     if detalles_version_recinto and len(detalles_version_recinto) >= 1:
         detalle_version_recinto_tupla = detalles_version_recinto[0]
         return {
-            'id_version_recinto': detalle_version_recinto_tupla[0],
-            'id_recinto': detalle_version_recinto_tupla[1],
-            'nombre_version_recinto': detalle_version_recinto_tupla[2],
-            'svg_version_recinto': detalle_version_recinto_tupla[3],
-            'opc_activo_version_recinto': detalle_version_recinto_tupla[5],
+            "id_version_recinto": detalle_version_recinto_tupla[0],
+            "id_recinto": detalle_version_recinto_tupla[1],
+            "nombre_version_recinto": detalle_version_recinto_tupla[2],
+            "svg_version_recinto": detalle_version_recinto_tupla[3],
+            "opc_activo_version_recinto": detalle_version_recinto_tupla[5],
         }
     else:
         return {}
@@ -69,13 +69,13 @@ def obtener_secciones(id_zona):
     if detalles_secciones and len(detalles_secciones) >= 1:
         secciones_tupla = detalles_secciones[0]
         return {
-            'id_seccion': secciones_tupla[0],
-            'id_zona': secciones_tupla[1],
-            'nombre_seccion': secciones_tupla[2],
-            'id_svg': secciones_tupla[3],
-            'aforo': secciones_tupla[4],
-            'fecha_registro': secciones_tupla[5],
-            'fecha_modificacion': secciones_tupla[6],
+            "id_seccion": secciones_tupla[0],
+            "id_zona": secciones_tupla[1],
+            "nombre_seccion": secciones_tupla[2],
+            "id_svg": secciones_tupla[3],
+            "aforo": secciones_tupla[4],
+            "fecha_registro": secciones_tupla[5],
+            "fecha_modificacion": secciones_tupla[6],
         }
     else:
         return {}
@@ -88,12 +88,12 @@ def obtener_detalles_zona(id_zona):
     if detalles_zonas and len(detalles_zonas) >= 1:
         detalle_zonas_tupla = detalles_zonas[0]
         return {
-            'id_zona': detalle_zonas_tupla[0],
-            'id_version_recinto': detalle_zonas_tupla[1],
-            'nombre_zona': detalle_zonas_tupla[2],
-            'color_zona': detalle_zonas_tupla[3],
-            'fecha_registro_zona': detalle_zonas_tupla[4],
-            'estatus_zona': detalle_zonas_tupla[5],
+            "id_zona": detalle_zonas_tupla[0],
+            "id_version_recinto": detalle_zonas_tupla[1],
+            "nombre_zona": detalle_zonas_tupla[2],
+            "color_zona": detalle_zonas_tupla[3],
+            "fecha_registro_zona": detalle_zonas_tupla[4],
+            "estatus_zona": detalle_zonas_tupla[5],
         }
     else:
         return {}
@@ -106,12 +106,12 @@ def obtener_detalles_seccion(id_seccion):
     if detalles_zonas and len(detalles_zonas) >= 1:
         detalle_zonas_tupla = detalles_zonas[0]
         return {
-            'id_zona': detalle_zonas_tupla[0],
-            'id_version_recinto': detalle_zonas_tupla[1],
-            'nombre_zona': detalle_zonas_tupla[2],
-            'color_zona': detalle_zonas_tupla[3],
-            'fecha_registro_zona': detalle_zonas_tupla[4],
-            'estatus_zona': detalle_zonas_tupla[5],
+            "id_zona": detalle_zonas_tupla[0],
+            "id_version_recinto": detalle_zonas_tupla[1],
+            "nombre_zona": detalle_zonas_tupla[2],
+            "color_zona": detalle_zonas_tupla[3],
+            "fecha_registro_zona": detalle_zonas_tupla[4],
+            "estatus_zona": detalle_zonas_tupla[5],
         }
     else:
         return {}
@@ -124,32 +124,32 @@ def obtener_detalles_config_seccion(id_seccion):
     if detalles_seccion and len(detalles_seccion) >= 1:
         detalle_seccion_tupla = detalles_seccion[0]
         return {
-            'id_seccion': detalle_seccion_tupla[0],
-            'id_zona': detalle_seccion_tupla[1],
-            'nom_seccion': detalle_seccion_tupla[2],
-            'id_svg': detalle_seccion_tupla[3],
-            'aforo_seccion': detalle_seccion_tupla[4],
-            'fec_registro_seccion': detalle_seccion_tupla[5],
-            'fec_modificacion_seccion': detalle_seccion_tupla[6],
-            'opc_activo_seccion': detalle_seccion_tupla[7],
-            'id_detalle_seccion': detalle_seccion_tupla[8],
-            'ancho_svg': detalle_seccion_tupla[9],
-            'alto_svg': detalle_seccion_tupla[10],
-            'num_filas': detalle_seccion_tupla[11],
-            'num_columnas': detalle_seccion_tupla[12],
-            'orientacion_distribucion': detalle_seccion_tupla[13],
-            'orientacion_escenario': detalle_seccion_tupla[14],
-            'nombre_escenario': detalle_seccion_tupla[15],
-            'posicion_inicial_x': detalle_seccion_tupla[16],
-            'posicion_inicial_y': detalle_seccion_tupla[17],
-            'incremento_interlineado': detalle_seccion_tupla[18],
-            'forma_asiento': detalle_seccion_tupla[19],
-            'incremento_x': detalle_seccion_tupla[20],
-            'incremento_y': detalle_seccion_tupla[21],
-            'direccion_numerado': detalle_seccion_tupla[22],
-            'arreglo_info': detalle_seccion_tupla[23],
-            'arreglo_posicion': detalle_seccion_tupla[24],
-            'svg_seccion': detalle_seccion_tupla[25]
+            "id_seccion": detalle_seccion_tupla[0],
+            "id_zona": detalle_seccion_tupla[1],
+            "nom_seccion": detalle_seccion_tupla[2],
+            "id_svg": detalle_seccion_tupla[3],
+            "aforo_seccion": detalle_seccion_tupla[4],
+            "fec_registro_seccion": detalle_seccion_tupla[5],
+            "fec_modificacion_seccion": detalle_seccion_tupla[6],
+            "opc_activo_seccion": detalle_seccion_tupla[7],
+            "id_detalle_seccion": detalle_seccion_tupla[8],
+            "ancho_svg": detalle_seccion_tupla[9],
+            "alto_svg": detalle_seccion_tupla[10],
+            "num_filas": detalle_seccion_tupla[11],
+            "num_columnas": detalle_seccion_tupla[12],
+            "orientacion_distribucion": detalle_seccion_tupla[13],
+            "orientacion_escenario": detalle_seccion_tupla[14],
+            "nombre_escenario": detalle_seccion_tupla[15],
+            "posicion_inicial_x": detalle_seccion_tupla[16],
+            "posicion_inicial_y": detalle_seccion_tupla[17],
+            "incremento_interlineado": detalle_seccion_tupla[18],
+            "forma_asiento": detalle_seccion_tupla[19],
+            "incremento_x": detalle_seccion_tupla[20],
+            "incremento_y": detalle_seccion_tupla[21],
+            "direccion_numerado": detalle_seccion_tupla[22],
+            "arreglo_info": detalle_seccion_tupla[23],
+            "arreglo_posicion": detalle_seccion_tupla[24],
+            "svg_seccion": detalle_seccion_tupla[25],
         }
     else:
         return {}
@@ -161,9 +161,7 @@ def obtener_svg_recinto_por_zona(id_zona):
     svg_por_zona = ejecutar_query(query, values, fetch_results=True)
     if svg_por_zona and len(svg_por_zona) >= 1:
         svg_por_zona_tupla = svg_por_zona[0]
-        return {
-            'svg_recinto': svg_por_zona_tupla[0]
-        }
+        return {"svg_recinto": svg_por_zona_tupla[0]}
     else:
         return {}
 
@@ -186,13 +184,35 @@ def actualizar_zona(id_zona, nuevo_nombre, nuevo_color, nuevo_opc_activo):
     ejecutar_query(query, values, fetch_results=False)
 
 
-def actualizar_detalles_seccion(id_seccion, new_svg_width, new_svg_height, new_axis, new_theater_name, new_alignment,
-                                new_initial_position_x, new_initial_position_y, new_line_spacing,
-                                new_position_increment_x, new_position_increment_y, new_seat_form):
+def actualizar_detalles_seccion(
+    id_seccion,
+    new_svg_width,
+    new_svg_height,
+    new_axis,
+    new_theater_name,
+    new_alignment,
+    new_initial_position_x,
+    new_initial_position_y,
+    new_line_spacing,
+    new_position_increment_x,
+    new_position_increment_y,
+    new_seat_form,
+):
     query = "SELECT * FROM proc_actualizar_ctl_seccion(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    values = (new_svg_width, new_svg_height, new_axis, new_alignment, new_theater_name, new_initial_position_x,
-              new_initial_position_y, new_line_spacing, new_seat_form, new_position_increment_x,
-              new_position_increment_y, id_seccion)
+    values = (
+        new_svg_width,
+        new_svg_height,
+        new_axis,
+        new_alignment,
+        new_theater_name,
+        new_initial_position_x,
+        new_initial_position_y,
+        new_line_spacing,
+        new_seat_form,
+        new_position_increment_x,
+        new_position_increment_y,
+        id_seccion,
+    )
     ejecutar_query(query, values, fetch_results=False)
 
 

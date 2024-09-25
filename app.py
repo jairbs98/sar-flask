@@ -7,7 +7,8 @@ app = flask.Flask(__name__)
 app.config['SECRET_KEY'] = 'CLAVE_SECRETA'
 
 app.context_processor(inject_global_variables)
-app.route('/')(index)
+app.route('/')(home)
+app.route('/recintos')(index)
 app.route('/guardar', methods=['POST'])(guardar_recinto_principal)
 app.route('/versiones_recinto/<int:recinto_id>')(versiones_recinto)
 app.route('/crear_zona/<int:id_version>')(crear_zona)
