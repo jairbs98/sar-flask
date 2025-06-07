@@ -12,4 +12,6 @@ COPY . .
 
 EXPOSE 5000
 
+ENV FLASK_APP app:create_app()
+ENV FLASK_ENV dev
 CMD ["python", "app.py"]

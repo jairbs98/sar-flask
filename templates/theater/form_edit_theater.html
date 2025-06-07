@@ -1,22 +1,25 @@
 {% block content %}
 <article class="details-container c3">
     <h2 class="custom-subtitle">{{ title_detail }} {{ detalles_recinto.nombre }}</h2>
-    <form id="edit_form" action="{{ url_for('editar_recinto', recinto_id=detalles_recinto.id) }}" method="post">
+    <form id="edit_form" action="{{ url_for('theater.editar_recinto_route', recinto_id=detalles_recinto.id) }}"
+        method="post">
+        {# Si estás usando Flask-WTF, aquí iría {{ form.hidden_tag() }} que incluye el csrf_token #}
+        {# Si no, asegúrate de añadir {{ csrf_token() }} si tienes CSRF habilitado globalmente #}
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_name" class="lbl-spacing">{{ label_name }}</label>
                 <input id="edit_name" class="custom-input" type="text" name="edit_name" autocomplete="off"
-                       value="{{ detalles_recinto.nombre }}" disabled>
+                    value="{{ detalles_recinto.nombre }}" disabled>
             </div>
             <div class="form-elements-container">
                 <label for="edit_address" class="lbl-spacing">{{ label_address }}</label>
                 <input id="edit_address" class="custom-input" type="text" name="edit_address" autocomplete="off"
-                       value="{{ detalles_recinto.direccion }}" disabled>
+                    value="{{ detalles_recinto.direccion }}" disabled>
             </div>
             <div class="form-elements-container">
                 <label for="add_map" class="lbl-spacing">{{ label_map }}</label>
                 <input id="add_map" class="custom-input" type="text" name="add_map" autocomplete="off"
-                       value="{{ detalles_recinto.mapa }}" disabled>
+                    value="{{ detalles_recinto.mapa }}" disabled>
             </div>
             <input id="edit_button" class="save-button edit-button" type="submit" value="{{ button_save }}" disabled>
         </div>
@@ -24,13 +27,13 @@
     <div>
         <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
     </div>
-    <a id="return_button"
-       href="{{ url_for('index') }}"
-       class="custom-button">
+    <a id="return_button" href="{{ url_for('theater.index') }}" {# Asumiendo que quieres regresar al listado de recintos
+        #} class="custom-button">
         <i class="fas fa-arrow-left"></i></a>
 </article>
 <div>
-    <a id="theater_versions" href="{{ url_for('versiones_recinto', recinto_id=detalles_recinto.id) }}"
-       class="return-button">{{ button_create_version }}</a>
+    {# Ruta para ir al formulario de creación de versión para este recinto #}
+    <a id="theater_versions" href="{{ url_for('versions.crear_version_form_route', recinto_id=detalles_recinto.id) }}"
+        class="return-button">{{ button_create_version }}</a>
 </div>
 {% endblock %}

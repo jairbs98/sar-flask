@@ -1,11 +1,31 @@
+from flask import current_app # Importa current_app
 from db.db_service import DataBaseFunctions
-from db.db_config import DB_CONFIG
+# Ya no necesitas importar DB_CONFIG de db_config.py
 
+def get_current_db_config():
+    """Recupera la configuración de la BD desde el contexto de la app Flask actual."""
+    config = current_app.config
+    return {
+        'driver': config['DB_DRIVER'],
+        'hostname': config['DB_HOSTNAME'],
+        'username': config['DB_USERNAME'],
+        'password': config['DB_PASSWORD'],
+        'database': config['DB_DATABASE'],
+        'port': config['DB_PORT'],
+    }
 
 def ejecutar_query(query, values=None, fetch_results=True, commit=False):
-    db_functions = DataBaseFunctions(**DB_CONFIG)
+    db_config_dict = get_current_db_config()
+
+    if None in db_config_dict.values():
+        raise ValueError("Faltan variables de configuración de la base de datos en la app Flask.")
+
+
+    db_functions = DataBaseFunctions(**db_config_dict)
     try:
         return db_functions.execute_query(query, values, fetch_results, commit)
+    except Exception as e:
+        raise
     finally:
         db_functions.close()
 

@@ -2,49 +2,37 @@
 <article class="details-container c3">
     <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_version_recinto.nombre_version_recinto }}</h1>
     <form id="edit_form"
-          action="{{ url_for('editar_version_recinto', version_id=detalles_version_recinto.id_version_recinto) }}"
-          method="post"
-          enctype="multipart/form-data">
+        action="{{ url_for('versions.editar_version_route', version_id=detalles_version_recinto.id_version_recinto) }}"
+        method="post" enctype="multipart/form-data">
+        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_name_version" class="lbl-spacing">{{ label_name }}</label>
                 <input id="edit_name_version" class="custom-input" type="text" name="edit_name_version"
-                       autocomplete="off" value="{{ detalles_version_recinto.nombre_version_recinto }}" disabled>
+                    autocomplete="off" value="{{ detalles_version_recinto.nombre_version_recinto }}" disabled>
             </div>
             <div class="form-elements-container">
                 <label for="edit_svg_version" class="lbl-spacing">{{ label_svg }}</label>
                 <input id="edit_svg_version" class="custom-file-input" type="file" name="edit_svg_version" accept=".svg"
-                       value="{{ detalles_version_recinto.svg_version_recinto }}" disabled>
+                    {# El atributo value no funciona así para type="file" , el navegador lo controla por seguridad #}
+                    disabled>
             </div>
             <input id="edit_button" class="save-button edit-button" type="submit" value="{{ button_save }}" disabled>
         </div>
-
     </form>
     <div>
         <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
     </div>
 
     <a id="return_button"
-       href="{{ url_for('detalle_recinto', recinto_id=detalles_version_recinto.id_recinto) }}"
-       class="custom-button">
+        href="{{ url_for('theater.detalle_recinto_route', recinto_id=detalles_version_recinto.id_recinto) }}"
+        class="custom-button">
         <i class="fas fa-arrow-left"></i></a>
-
 </article>
 
 <div>
     <a id="theater_versions"
-       href="{{ url_for('crear_zona', id_version=detalles_version_recinto.id_version_recinto) }}"
-       class="return-button">{{ button_create_area }}</a>
+        href="{{ url_for('areas.crear_zona_form_route', id_version=detalles_version_recinto.id_version_recinto) }}"
+        class="return-button">{{ button_create_area }}</a>
 </div>
-
-<!--<button id="openModalBtn">Abrir Modal</button>-->
-
-<!--<div id="myModal" class="modal">-->
-<!--    <div class="modal-content">-->
-<!--        <span class="close-btn" onclick="closeModal()">&times;</span>-->
-<!--        <h2>Este es mi modal</h2>-->
-<!--        <p>Contenido del modal...</p>-->
-<!--    </div>-->
-<!--</div>-->
-
 {% endblock %}
