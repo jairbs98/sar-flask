@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from flask_paginate import Pagination # Asegúrate que esta importación está aquí o en utils
 from utils import get_paginated_data
 from db_queries import (
@@ -52,8 +52,7 @@ def guardar_recinto_route(): # Ruta de app.py para guardar_recinto_principal
 def detalle_recinto_route(recinto_id): # Ruta de app.py para detalle_recinto
     detalles_recinto_data = obtener_detalles_recinto(recinto_id)
     if not detalles_recinto_data:
-        flash("Recinto no encontrado.", "error")
-        return redirect(url_for('theater.index'))
+        abort(404)
 
     versiones, pagination_obj = get_paginated_data(
         10, obtener_versiones_listado, obtener_total_versiones, recinto_id

@@ -1,5 +1,4 @@
-{% block content_left %} {# Asumiendo que este bloque se incluye en config_theater_sections.html que extiende
-dual_base.html #}
+{% block content_left %}
 <article class="details-container c3">
     <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_seccion.nom_seccion }}</h1>
     {#
@@ -16,7 +15,7 @@ dual_base.html #}
         <form id="edit_form"
             action="{{ url_for('sections.editar_seccion_basica_route', id_seccion=detalles_seccion.id_seccion) }}"
             method="post" enctype="multipart/form-data">
-            {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="horizontal-container">
                 <div class="form-elements-container">
                     <label for="edit_section_name" class="lbl-spacing">{{ label_name }}</label>
@@ -92,7 +91,7 @@ dual_base.html #}
             <form
                 action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
                 method="post" enctype="multipart/form-data" class="details-container">
-                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="horizontal-container">
                     <div class="form-elements-container">
                         {# CAMPOS PARA NUMERACIÓN AQUÍ. Ejemplo: #}
@@ -120,7 +119,7 @@ dual_base.html #}
             <form
                 action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
                 method="post" enctype="multipart/form-data" class="details-container">
-                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="horizontal-container">
                     <div class="form-elements-container">
                         {# CAMPOS PARA POSICIONES AQUÍ. Ejemplo: #}
@@ -143,7 +142,7 @@ dual_base.html #}
             <form
                 action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
                 method="post" enctype="multipart/form-data" class="details-container">
-                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
                 {# Incluir los campos de filas y columnas aquí si se guardan con la configuración avanzada #}
                 {# O eliminar el <article> anterior que los contenía si se manejan aquí #}

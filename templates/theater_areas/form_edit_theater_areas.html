@@ -2,7 +2,7 @@
 <article class="details-container c3">
     <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_zona.nombre_zona }}</h1>
     <form id="edit_form" action="{{ url_for('areas.editar_zona_route', id_zona=detalles_zona.id_zona) }}" method="post">
-        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_area_name" class="lbl-spacing">{{ label_name }}</label>

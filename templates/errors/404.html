@@ -1,0 +1,9 @@
+{% extends 'new_base.html' %} {# O la base que prefieras #}
+
+{% block content %}
+<div style="text-align: center; padding: 50px;">
+    <h1 class="custom-title">Error 404</h1>
+    <p class="custom-subtitle">Página no encontrada</p>
+    <a href="{{ url_for('main.home') }}" class="return-button" style="position: static; margin-top: 20px;">Volver al inicio</a>
+</div>
+{% endblock %}
