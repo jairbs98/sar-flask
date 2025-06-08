@@ -8,3 +8,4 @@ flask_login
 flask-paginate
 Flask-SQLALchemy
 psycopg2
+bleach

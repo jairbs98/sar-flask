@@ -4,7 +4,7 @@
     <form id="edit_form" action="{{ url_for('theater.editar_recinto_route', recinto_id=detalles_recinto.id) }}"
         method="post">
         {# Si estás usando Flask-WTF, aquí iría {{ form.hidden_tag() }} que incluye el csrf_token #}
-        {# Si no, asegúrate de añadir {{ csrf_token() }} si tienes CSRF habilitado globalmente #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_name" class="lbl-spacing">{{ label_name }}</label>
