@@ -12,11 +12,11 @@ from flask_wtf.csrf import CSRFProtect
 
 csrf = CSRFProtect()
 
-from main.routes import main_bp
-from theater.routes import theater_bp
-from versions.routes import versions_bp
-from areas.routes import areas_bp
-from sections.routes import sections_bp
+from blueprints.main import main_bp
+from blueprints.theater import theater_bp
+from blueprints.versions import versions_bp
+from blueprints.areas import areas_bp
+from blueprints.sections import sections_bp
 
 
 def create_app(config_name=None):
