@@ -3,7 +3,7 @@
     <h2 class="custom-subtitle">{{ title_create_theater }}</h2>
     {# La acción original era "/guardar". Ahora usamos url_for. #}
     <form action="{{ url_for('theater.guardar_recinto_route') }}" method="post" autocomplete="off">
-        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="name" class="lbl-spacing">{{ label_name }}</label>

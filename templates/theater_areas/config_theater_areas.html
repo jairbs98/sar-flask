@@ -6,6 +6,6 @@
 {% endblock %}
 
 {% block content_right %}
-{{ svg_recinto_por_zona['svg_recinto']|safe }}
+{{ svg_recinto_por_zona['svg_recinto']|safe_html }}
 <!--<button id="downloadBtn" class="download-button">{{ button_download }}</button>-->
 {% endblock %}

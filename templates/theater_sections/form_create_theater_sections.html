@@ -7,6 +7,7 @@
     </div>
     <form action="{{ url_for('sections.guardar_seccion_route', id_zona=detalles_seccion.id_zona) }}" method="post"
         enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="nombre_seccion">{{ label_name }}</label>

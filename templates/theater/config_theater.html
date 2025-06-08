@@ -6,6 +6,6 @@
 {% endblock %}
 
 {% block content_right %}
-    {{ detalles_recinto['mapa']|safe }}
+    {{ detalles_recinto['mapa']|safe_html }}
 <!--<button id="downloadBtn" class="download-button">{{ button_download }}</button>-->
 {% endblock %}

@@ -4,7 +4,7 @@
     <form id="edit_form"
         action="{{ url_for('versions.editar_version_route', version_id=detalles_version_recinto.id_version_recinto) }}"
         method="post" enctype="multipart/form-data">
-        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_name_version" class="lbl-spacing">{{ label_name }}</label>
