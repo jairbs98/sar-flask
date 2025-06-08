@@ -21,19 +21,12 @@
                     <td>{{ seccion[3] }}</td>
                     <td>{{ seccion[6] }}</td>
                     <td>
-                        <div class="dropdown" onclick="toggleDropdown(event)">
-                            <button class="config-button">
-                                <i id="gear_icon" class="fas fa-cog"></i>
+                        <form method="get"
+                            action="{{ url_for('sections.detalle_seccion_route', id_seccion=seccion[0]) }}">
+                            <button type="submit" class="config-button">
+                                <i class="fas fa-cog"></i>
                             </button>
-                            <div id="dropdownMenu" class="dropdown-content">
-                                <a href="{{ url_for('sections.detalle_seccion_route', id_seccion=seccion[0]) }}">
-                                    <i class="fas fa-cog"></i>
-                                </a>
-                                <a href="#">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
-                            </div>
-                        </div>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
