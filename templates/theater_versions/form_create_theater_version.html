@@ -7,7 +7,7 @@
     </div>
     <form action="{{ url_for('versions.guardar_version_route', recinto_id=detalles_recinto.id) }}" method="post"
         enctype="multipart/form-data">
-        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="nom_version">{{ label_name }}</label>

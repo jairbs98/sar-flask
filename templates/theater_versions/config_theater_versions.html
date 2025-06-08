@@ -6,6 +6,6 @@
 {% endblock %}
 
 {% block content_right %}
-{{ detalles_version_recinto['svg_version_recinto']|safe }}
+{{ detalles_version_recinto['svg_version_recinto']|safe_html }}
 <!--<button id="downloadBtn" class="download-button">{{ button_download }}</button>-->
 {% endblock %}

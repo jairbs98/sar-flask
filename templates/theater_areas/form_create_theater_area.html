@@ -8,7 +8,7 @@
     </div>
     <form action="{{ url_for('areas.guardar_zona_route', id_version=detalles_recinto.id_version_recinto) }}"
         method="post" enctype="multipart/form-data">
-        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="nombre_zona">{{ label_name }}</label>
