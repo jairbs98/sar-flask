@@ -9,3 +9,4 @@ flask-paginate
 Flask-SQLALchemy
 psycopg2
 bleach
+python-dotenv
