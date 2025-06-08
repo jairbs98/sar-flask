@@ -1,35 +1,37 @@
 {% block content %}
-
 <div>
     <div class="table-container">
-        <table id="theater_versions" class="styled-table theater-area">
+        <table id="theater_areas_table" class="styled-table theater-area"> {# Cambiado id de tabla para que sea único si
+            es necesario #}
             <thead class="c-th">
-            <tr>
-                <th class="column-id">{{ header_id }}</th>
-                <th class="column-name">{{ header_name }}</th>
-                <th class="column-date">{{ header_color }}</th>
-                <th class="column-svg-id">{{ header_status }}</th>
-                <th class="column-config">{{ header_config }}</th>
-            </tr>
+                <tr>
+                    <th class="column-id">{{ header_id }}</th>
+                    <th class="column-name">{{ header_name }}</th>
+                    <th class="column-date">{{ header_color }}</th> {# Asumo que column-date se refiere a header_color
+                    aquí #}
+                    <th class="column-svg-id">{{ header_status }}</th> {# Asumo que column-svg-id se refiere a
+                    header_status aquí #}
+                    <th class="column-config">{{ header_config }}</th>
+                </tr>
             </thead>
             <tbody>
-            {% for zona in data_zonas.zonas %}
-            <tr>
-                <td>{{ zona[0] }}</td>
-                <td>{{ zona[2] }}</td>
-                <td>
-                    <div class="color-bar" style="background-color: {{ zona[3] }}"></div>
-                </td>
-                <td>{{ zona[5] }}</td>
-                <td>
-                    <form method="get" action="{{ url_for('detalle_zonas', id_zona=zona[0]) }}">
-                        <button type="submit" class="config-button">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
+                {% for zona in data_zonas.zonas %}
+                <tr>
+                    <td>{{ zona[0] }}</td>
+                    <td>{{ zona[2] }}</td>
+                    <td>
+                        <div class="color-bar" style="background-color: {{ zona[3] }}"></div>
+                    </td>
+                    <td>{{ zona[5] }}</td>
+                    <td>
+                        <form method="get" action="{{ url_for('areas.detalle_zona_route', id_zona=zona[0]) }}">
+                            <button type="submit" class="config-button">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -37,5 +39,4 @@
         {{ data_zonas.pagination.links }}
     </div>
 </div>
-
 {% endblock %}

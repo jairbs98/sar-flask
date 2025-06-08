@@ -1,29 +1,58 @@
+# app.py
 import flask
-from utils import inject_global_variables
-from routes import *
+from utils import inject_global_variables # Usar importación relativa si app.py está al mismo nivel que utils.py
+from config import config_by_name
+import os
+# from flask_wtf.csrf import CSRFProtect # Descomentar si implementas CSRF
 
-app = flask.Flask(__name__)
+# csrf = CSRFProtect() # Descomentar
 
-app.config['SECRET_KEY'] = 'CLAVE_SECRETA'
+# Importa tus blueprints
+from main.routes import main_bp
+from theater.routes import theater_bp
+from versions.routes import versions_bp
+from areas.routes import areas_bp
+from sections.routes import sections_bp
 
-app.context_processor(inject_global_variables)
-app.route('/')(home)
-app.route('/recintos')(index)
-app.route('/guardar', methods=['POST'])(guardar_recinto_principal)
-app.route('/versiones_recinto/<int:recinto_id>')(versiones_recinto)
-app.route('/crear_zona/<int:id_version>')(crear_zona)
-app.route('/detalle_zonas/<int:id_zona>')(detalle_zonas)
-app.route('/crear_seccion/<int:id_zona>')(crear_seccion)
-app.route('/detalle_seccion/<int:id_seccion>')(detalle_seccion)
-app.route('/detalle_recinto/<int:recinto_id>')(detalle_recinto)
-app.route('/detalle_version_recinto/<int:version_id>')(detalle_version_recinto)
-app.route('/guardar_version_recinto/<int:recinto_id>', methods=['POST'])(guardar_version_recinto)
-app.route('/guardar_zona/<int:id_version>', methods=['POST'])(guardar_zona)
-app.route('/guardar_seccion/<int:id_zona>', methods=['POST'])(guardar_seccion)
-app.route('/editar_recinto/<int:recinto_id>', methods=['GET', 'POST'])(editar_recinto)
-app.route('/editar_version_recinto/<int:version_id>', methods=['GET', 'POST'])(editar_version_recinto)
-app.route('/editar_zona/<int:id_zona>', methods=['GET', 'POST'])(editar_zona)
-app.route('/editar_detalle_seccion/<int:id_seccion>', methods=['GET', 'POST'])(editar_detalle_seccion)
+def create_app(config_name=None):
+    if config_name is None:
+        config_name = os.getenv('FLASK_ENV', 'default')
 
+    app = flask.Flask(__name__)
+    app.config.from_object(config_by_name[config_name])
+
+    # csrf.init_app(app) # Descomentar para CSRF
+
+    app.context_processor(inject_global_variables)
+
+    # Registrar Blueprints
+    app.register_blueprint(main_bp)
+    app.register_blueprint(theater_bp)
+    app.register_blueprint(versions_bp)
+    app.register_blueprint(areas_bp)
+    app.register_blueprint(sections_bp)
+
+    # (Opcional) Páginas de error personalizadas
+    @app.errorhandler(404)
+    def not_found_error(error):
+        # app.logger.warning(f"Recurso no encontrado: {request.path} - {error}") # Necesitas importar request y app.logger (current_app)
+        return flask.render_template('errors/404.html'), 404 # Asume que creas esta plantilla
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        # app.logger.error(f"Error interno del servidor: {error}", exc_info=True)
+        return flask.render_template('errors/500.html'), 500 # Asume que creas esta plantilla
+
+    return app
+
+# Para ejecución local y para Gunicorn/WSGI
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    flask_env = os.getenv('FLASK_ENV', 'dev')
+    app = create_app(flask_env)
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+else: # Cuando es importado por Gunicorn u otro servidor WSGI
+    # Gunicorn buscará una instancia de 'app' o llamará a create_app() si se especifica.
+    # Si tu CMD de Docker es "gunicorn ... app:create_app()" no necesitas esto.
+    # Si es "gunicorn ... app:app", entonces necesitas:
+    gunicorn_app = create_app(os.getenv('FLASK_ENV', 'prod'))

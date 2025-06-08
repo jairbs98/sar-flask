@@ -1,206 +1,259 @@
-{% block content_left %}
+{% block content_left %} {# Asumiendo que este bloque se incluye en config_theater_sections.html que extiende
+dual_base.html #}
 <article class="details-container c3">
     <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_seccion.nom_seccion }}</h1>
-    <form id="edit_form" action="{{ url_for('guardar_seccion', id_zona=detalles_seccion.id_zona) }}" method="post"
-          enctype="multipart/form-data">
+    {#
+    NOTA IMPORTANTE:
+    Este formulario es para editar los datos BÁSICOS de la sección.
+    Deberás crear una ruta en tu blueprint 'sections' para manejar esta acción.
+    Por ejemplo, en sections/routes.py:
+    @sections_bp.route('/editar-basico/<int:id_seccion>', methods=['POST'])
+        def editar_seccion_basica_route(id_seccion):
+        # Lógica para actualizar nombre_seccion, id_svg, aforo_seccion, opc_activo_seccion
+        # ...
+        return redirect(url_for('sections.detalle_seccion_route', id_seccion=id_seccion))
+        #}
+        <form id="edit_form"
+            action="{{ url_for('sections.editar_seccion_basica_route', id_seccion=detalles_seccion.id_seccion) }}"
+            method="post" enctype="multipart/form-data">
+            {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+            <div class="horizontal-container">
+                <div class="form-elements-container">
+                    <label for="edit_section_name" class="lbl-spacing">{{ label_name }}</label>
+                    <input id="edit_section_name" class="custom-input" type="text" name="edit_section_name"
+                        autocomplete="off" value="{{ detalles_seccion.nom_seccion }}" disabled>
+                </div>
+
+                <div class="form-elements-container">
+                    <label for="edit_id_svg" class="lbl-spacing">{{ label_svg_id }}</label>
+                    <input id="edit_id_svg" class="custom-input" type="text" name="edit_id_svg" autocomplete="off"
+                        value="{{ detalles_seccion.id_svg }}" disabled>
+                </div>
+
+                <div class="form-elements-container">
+                    <label for="edit_capacity" class="lbl-spacing">{{ label_capacity }}</label>
+                    <input id="edit_capacity" class="custom-input" type="number" name="edit_capacity" autocomplete="off"
+                        value="{{ detalles_seccion.aforo_seccion }}" disabled>
+                </div>
+                <div class="form-elements-container">
+                    <label class="lbl-spacing" for="edit_status_checkbox_basic">{{ label_status }}</label> {# ID del
+                    checkbox cambiado #}
+                    <label class="switch">
+                        <input id="edit_status_checkbox_basic" type="checkbox" name="edit_status_checkbox_basic" {% if
+                            detalles_seccion.opc_activo_seccion %} checked {% endif %} disabled>
+                        <span class="slider"></span>
+                    </label>
+                    {# Campo hidden para enviar el estado del switch básico #}
+                    <input type="hidden" id="edit_status_hidden_basic" name="edit_status_hidden_basic"
+                        value="{{ 'true' if detalles_seccion.opc_activo_seccion else 'false' }}">
+                </div>
+                <input id="edit_button" class="save-button edit-button" type="submit" value="{{ button_save }}"
+                    disabled>
+            </div>
+        </form>
+        <div>
+            <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
+        </div>
+</article>
+
+{# Formulario para Filas y Columnas (si se guardan por separado o con los detalles avanzados) #}
+{# Si estos campos se guardan con el formulario de "Avanzado", pueden estar dentro de ese form #}
+{# Si se guardan independientemente, necesitan su propio <form> y ruta de acción #}
+    {# Por ahora, los dejo como inputs que podrían ser parte de uno de los forms de abajo si se mueven #}
+    <article class="details-container">
         <div class="horizontal-container">
             <div class="form-elements-container">
-                <label for="edit_section_name" class="lbl-spacing">{{ label_name }}</label>
-                <input id="edit_section_name" class="custom-input" type="text" name="edit_section_name"
-                       autocomplete="off"
-                       value="{{ detalles_seccion.nom_seccion }}" disabled>
+                <label for="edit_num_filas" class="lbl-spacing">Filas:</label>
+                <input id="edit_num_filas" class="custom-input" type="number" name="edit_num_filas" autocomplete="off"
+                    value="{{ detalles_seccion.num_filas }}">
             </div>
 
             <div class="form-elements-container">
-                <label for="edit_id_svg" class="lbl-spacing">{{ label_svg_id }}</label>
-                <input id="edit_id_svg" class="custom-input" type="text" name="edit_id_svg" autocomplete="off"
-                       value="{{ detalles_seccion.id_svg }}" disabled>
+                <label for="edit_num_columnas" class="lbl-spacing">Columnas:</label>
+                <input id="edit_num_columnas" class="custom-input" type="number" name="edit_num_columnas"
+                    autocomplete="off" value="{{ detalles_seccion.num_columnas }}">
             </div>
-
-            <div class="form-elements-container">
-                <label for="edit_capacity" class="lbl-spacing">{{ label_capacity }}</label>
-                <input id="edit_capacity" class="custom-input" type="number" name="edit_capacity" autocomplete="off"
-                       value="{{ detalles_seccion.aforo_seccion }}" disabled>
-            </div>
-            <div class="form-elements-container">
-                <label class="lbl-spacing" for="edit_status">{{ label_status }}</label>
-                <label class="switch">
-                    <input id="edit_status" type="checkbox" name="edit_status" {% if detalles_seccion.opc_activo_seccion
-                           %}
-                           checked
-                           {% endif %} disabled>
-                    <span class="slider"></span>
-                </label>
-                <input type="hidden" id="edit_status_hidden" value="">
-            </div>
-            <input id="edit_button" class="save-button edit-button" type="submit" value="Guardar" disabled>
         </div>
-    </form>
-    <div>
-        <button id="enable_edit_button" type="button" class="return-button">{{ button_edit }}</button>
-    </div>
-</article>
+    </article>
 
-<article class="details-container">
-    <div class="horizontal-container">
-        <div class="form-elements-container">
-            <label for="edit_num_filas" class="lbl-spacing">Filas:</label>
-            <input id="edit_num_filas" class="custom-input" type="number" name="edit_num_filas"
-                   autocomplete="off"
-                   value="{{ detalles_seccion.num_filas }}">
+    <fieldset class="expandable-fieldset details-container">
+        <div class="horizontal-container padre">
+            <legend class="expandable-legend custom-subtitle">Numeración</legend>
+            <img src="{{ url_for('static', filename='images/chevron_down.svg') }}" alt="icono"
+                class="chevron-down-button derecha" onclick="toggleAnotherFieldset(0)"> {# Pasar índice o ID único #}
         </div>
+        <article id="anotherFieldsetContent_0" style="display: none;"> {# ID único y display none inicial #}
+            {# Si la numeración se edita con los detalles avanzados, este form podría no ser necesario
+            o debería apuntar a la misma ruta 'sections.editar_detalle_seccion_route'
+            y los campos de numeración estarían dentro de ese form.
+            Asumiré que es parte de 'editar_detalle_seccion_route' por ahora.
+            Si es una acción separada, necesitará su propia ruta.
+            #}
+            <form
+                action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
+                method="post" enctype="multipart/form-data" class="details-container">
+                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+                <div class="horizontal-container">
+                    <div class="form-elements-container">
+                        {# CAMPOS PARA NUMERACIÓN AQUÍ. Ejemplo: #}
+                        {# <label for="tipo_numeracion">Tipo:</label> #}
+                        {# <input type="text" id="tipo_numeracion" name="tipo_numeracion"
+                            value="{{ detalles_seccion.direccion_numerado }}"> #}
+                        <p>Campos para configuración de Numeración (ej. dirección, arreglo_info). Estos deben ser parte
+                            del form que guarda los detalles.</p>
+                    </div>
+                </div>
+                {# <input class="save-button" type="submit" value="{{ button_save }}"> #} {# Podría ser un solo botón de
+                guardar en el fieldset de Avanzado #}
+            </form>
+        </article>
+    </fieldset>
 
-        <div class="form-elements-container">
-            <label for="edit_num_columnas" class="lbl-spacing">Columnas:</label>
-            <input id="edit_num_columnas" class="custom-input" type="number" name="edit_num_columnas" autocomplete="off"
-                   value="{{ detalles_seccion.num_columnas }}">
+    <fieldset class="expandable-fieldset details-container">
+        <div class="horizontal-container padre">
+            <legend class="expandable-legend custom-subtitle">Posiciones</legend>
+            <img src="{{ url_for('static', filename='images/chevron_down.svg') }}" alt="icono"
+                class="chevron-down-button derecha" onclick="toggleAnotherFieldset(1)"> {# Pasar índice o ID único #}
         </div>
-    </div>
-</article>
-
-<fieldset class="expandable-fieldset details-container">
-    <div class="horizontal-container padre">
-        <legend class="expandable-legend custom-subtitle">Numeración</legend>
-        <img src="/static/images/chevron_down.svg" alt="icono" class="chevron-down-button derecha"
-             onclick="toggleAnotherFieldset()">
-    </div>
-    <article id="anotherFieldsetContent">
-        <form action="{{ url_for('editar_detalle_seccion', id_seccion=detalles_seccion.id_seccion) }}" method="post"
-              enctype="multipart/form-data" class="details-container">
-            <div class="horizontal-container">
-                <div class="form-elements-container">
+        <article id="anotherFieldsetContent_1" style="display: none;"> {# ID único y display none inicial #}
+            {# Similar a Numeración, si esto es parte de 'editar_detalle_seccion_route' #}
+            <form
+                action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
+                method="post" enctype="multipart/form-data" class="details-container">
+                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
+                <div class="horizontal-container">
+                    <div class="form-elements-container">
+                        {# CAMPOS PARA POSICIONES AQUÍ. Ejemplo: #}
+                        <p>Campos para configuración de Posiciones (ej. arreglo_posicion). Estos deben ser parte del
+                            form que guarda los detalles.</p>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </article>
-</fieldset>
+                {# <input class="save-button" type="submit" value="{{ button_save }}"> #}
+            </form>
+        </article>
+    </fieldset>
 
-<fieldset class="expandable-fieldset details-container">
-    <div class="horizontal-container padre">
-        <legend class="expandable-legend custom-subtitle">Posiciones</legend>
-        <img src="/static/images/chevron_down.svg" alt="icono" class="chevron-down-button derecha"
-             onclick="toggleAnotherFieldset()">
-    </div>
-    <article id="anotherFieldsetContent">
-        <form action="{{ url_for('editar_detalle_seccion', id_seccion=detalles_seccion.id_seccion) }}" method="post"
-              enctype="multipart/form-data" class="details-container">
-            <div class="horizontal-container">
-                <div class="form-elements-container">
-                </div>
-            </div>
-        </form>
-    </article>
-</fieldset>
+    <fieldset class="expandable-fieldset details-container">
+        <div class="horizontal-container padre">
+            <legend class="expandable-legend custom-subtitle">Avanzado</legend>
+            <img src="{{ url_for('static', filename='images/chevron_down.svg') }}" alt="icono"
+                class="chevron-down-button derecha" onclick="toggleFieldset()"> {# toggleFieldset original #}
+        </div>
+        <article id="fieldsetContent" style="display: none;"> {# display none inicial #}
+            <form
+                action="{{ url_for('sections.editar_detalle_seccion_route', id_seccion=detalles_seccion.id_seccion) }}"
+                method="post" enctype="multipart/form-data" class="details-container">
+                {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
 
-<fieldset class="expandable-fieldset details-container">
-    <div class="horizontal-container padre">
-        <legend class="expandable-legend custom-subtitle">Avanzado</legend>
-        <img src="/static/images/chevron_down.svg" alt="icono" class="chevron-down-button derecha"
-             onclick="toggleFieldset()">
-    </div>
-    <article id="fieldsetContent">
-        <form action="{{ url_for('editar_detalle_seccion', id_seccion=detalles_seccion.id_seccion) }}" method="post"
-              enctype="multipart/form-data" class="details-container">
+                {# Incluir los campos de filas y columnas aquí si se guardan con la configuración avanzada #}
+                {# O eliminar el <article> anterior que los contenía si se manejan aquí #}
+                    <div class="horizontal-container">
+                        <div class="form-elements-container">
+                            <label for="edit_svg_width" class="lbl-spacing">Ancho</label>
+                            <input id="edit_svg_width" class="custom-input" type="number" name="edit_svg_width"
+                                autocomplete="off" value="{{ detalles_seccion.ancho_svg }}">
+                        </div>
+                        <div class="form-elements-container">
+                            <label for="edit_svg_height" class="lbl-spacing">Alto</label>
+                            <input id="edit_svg_height" class="custom-input" type="number" name="edit_svg_height"
+                                autocomplete="off" value="{{ detalles_seccion.alto_svg }}">
+                        </div>
+                        <div class="form-elements-container">
+                            <label class="lbl-spacing" for="edit_axis_checkbox">{{ label_status }} Orientación:</label>
+                            {# Label más descriptiva #}
+                            <label class="switch">
+                                <input id="edit_axis_checkbox" type="checkbox" name="edit_axis_checkbox" {% if
+                                    detalles_seccion.orientacion_distribucion %} checked {% endif %}>
+                                <span class="slider"></span>
+                            </label>
+                            <input type="hidden" id="edit_axis_hidden" name="edit_axis_hidden"
+                                value="{{ 'true' if detalles_seccion.orientacion_distribucion else 'false' }}">
+                        </div>
+                    </div>
 
-            <div class="horizontal-container">
-                <div class="form-elements-container">
-                    <label for="edit_svg_width" class="lbl-spacing">Ancho</label>
-                    <input id="edit_svg_width" class="custom-input" type="number" name="edit_svg_width"
-                           autocomplete="off"
-                           value="{{ detalles_seccion.ancho_svg }}">
-                </div>
-                <div class="form-elements-container">
-                    <label for="edit_svg_height" class="lbl-spacing">Alto</label>
-                    <input id="edit_svg_height" class="custom-input" type="number" name="edit_svg_height"
-                           autocomplete="off"
-                           value="{{ detalles_seccion.alto_svg }}">
-                </div>
-                <div class="form-elements-container">
-                    <label class="lbl-spacing" for="edit_axis">Orientación:</label>
-                    <label class="switch">
-                        <input id="edit_axis" type="checkbox" name="edit_axis" {% if
-                               detalles_seccion.orientacion_distribucion %} checked {% endif %}>
-                        <span class="slider"></span>
-                    </label>
-                    <input type="hidden" id="edit_axis_hidden" value="">
-                </div>
-            </div>
+                    <div class="horizontal-container">
+                        <div class="form-elements-container">
+                            <label for="edit_theater_name" class="lbl-spacing">Nombre escenario:</label>
+                            <input id="edit_theater_name" class="custom-input" type="text" name="edit_theater_name"
+                                autocomplete="off" value="{{ detalles_seccion.nombre_escenario }}">
+                        </div>
+                        <div class="form-elements-container">
+                            <label class="lbl-spacing" for="edit_alignment_checkbox">Alineación:</label> {# Label más
+                            descriptiva #}
+                            <label class="switch">
+                                <input id="edit_alignment_checkbox" type="checkbox" name="edit_alignment_checkbox" {% if
+                                    detalles_seccion.orientacion_escenario %} checked {% endif %}>
+                                <span class="slider"></span>
+                            </label>
+                            <input type="hidden" id="edit_alignment_hidden" name="edit_alignment_hidden"
+                                value="{{ 'true' if detalles_seccion.orientacion_escenario else 'false' }}">
+                        </div>
+                    </div>
 
-            <div class="horizontal-container">
-                <div class="form-elements-container">
-                    <label for="edit_theater_name" class="lbl-spacing">Nombre escenario:</label>
-                    <input id="edit_theater_name" class="custom-input" type="text" name="edit_theater_name"
-                           autocomplete="off"
-                           value="{{ detalles_seccion.nombre_escenario }}">
-                </div>
-                <div class="form-elements-container">
-                    <label class="lbl-spacing" for="edit_alignment">Alineación:</label>
-                    <label class="switch">
-                        <input id="edit_alignment" type="checkbox" name="edit_alignment" {% if
-                               detalles_seccion.orientacion_escenario
-                               %} checked {% endif %}>
-                        <span class="slider"></span>
-                    </label>
-                    <input type="hidden" id="edit_alignment_hidden" value="">
-                </div>
-            </div>
+                    <div class="horizontal-container">
+                        <div class="form-elements-container">
+                            <label for="edit_initial_position_x" class="lbl-spacing">Posición inicial X</label>
+                            <input id="edit_initial_position_x" class="custom-input" type="number"
+                                name="edit_initial_position_x" autocomplete="off"
+                                value="{{ detalles_seccion.posicion_inicial_x }}">
+                        </div>
 
-            <div class="horizontal-container">
-                <div class="form-elements-container">
-                    <label for="edit_initial_position_x" class="lbl-spacing">Posición inicial X</label>
-                    <input id="edit_initial_position_x" class="custom-input" type="number"
-                           name="edit_initial_position_x"
-                           autocomplete="off"
-                           value="{{ detalles_seccion.posicion_inicial_x }}">
-                </div>
+                        <div class="form-elements-container">
+                            <label for="edit_initial_position_y" class="lbl-spacing">Posición inicial Y:</label>
+                            <input id="edit_initial_position_y" class="custom-input" type="number"
+                                name="edit_initial_position_y" autocomplete="off"
+                                value="{{ detalles_seccion.posicion_inicial_y }}">
+                        </div>
 
-                <div class="form-elements-container">
-                    <label for="edit_initial_position_y" class="lbl-spacing">Posición inicial Y:</label>
-                    <input id="edit_initial_position_y" class="custom-input" type="number"
-                           name="edit_initial_position_y" autocomplete="off"
-                           value="{{ detalles_seccion.posicion_inicial_y }}">
-                </div>
+                        <div class="form-elements-container">
+                            <label for="edit_line_spacing" class="lbl-spacing">Inter:</label>
+                            <input id="edit_line_spacing" class="custom-input" type="number" name="edit_line_spacing"
+                                autocomplete="off" value="{{ detalles_seccion.incremento_interlineado }}">
+                        </div>
+                    </div>
 
-                <div class="form-elements-container">
-                    <label for="edit_line_spacing" class="lbl-spacing">Inter:</label>
-                    <input id="edit_line_spacing" class="custom-input" type="number" name="edit_line_spacing"
-                           autocomplete="off"
-                           value="{{ detalles_seccion.incremento_interlineado }}">
-                </div>
-            </div>
+                    <div class="horizontal-container">
+                        <div class="form-elements-container">
+                            <label for="edit_position_increment_x" class="lbl-spacing">Incremento X:</label>
+                            <input id="edit_position_increment_x" class="custom-input" type="number"
+                                name="edit_position_increment_x" autocomplete="off"
+                                value="{{ detalles_seccion.incremento_x }}">
+                        </div>
 
-            <div class="horizontal-container">
+                        <div class="form-elements-container">
+                            <label for="edit_position_increment_y" class="lbl-spacing">Incremento Y:</label>
+                            <input id="edit_position_increment_y" class="custom-input" type="number"
+                                name="edit_position_increment_y" autocomplete="off"
+                                value="{{ detalles_seccion.incremento_y }}">
+                        </div>
 
-                <div class="form-elements-container">
-                    <label for="edit_position_increment_x" class="lbl-spacing">Incremento X:</label>
-                    <input id="edit_position_increment_x" class="custom-input" type="number"
-                           name="edit_position_increment_x" autocomplete="off"
-                           value="{{ detalles_seccion.incremento_x }}">
-                </div>
+                        <div class="form-elements-container">
+                            <label for="edit_seat_form" class="lbl-spacing">Forma asiento:</label>
+                            <select id="edit_seat_form" name="edit_seat_form" class="custom-input">
+                                {# Deberías poblar este select con las opciones disponibles,
+                                y seleccionar la que está guardada en detalles_seccion.forma_asiento #}
+                                <option value="rect" {% if detalles_seccion.forma_asiento=='rect' %}selected{% endif %}>
+                                    Rectángulo</option>
+                                <option value="circle" {% if detalles_seccion.forma_asiento=='circle' %}selected{% endif
+                                    %}>Círculo</option>
+                                {# Añade más opciones según necesites #}
+                                {# Si la forma actual no está en las opciones, se puede mostrar directamente #}
+                                {% if detalles_seccion.forma_asiento not in ['rect', 'circle'] %}
+                                <option value="{{detalles_seccion.forma_asiento}}" selected>
+                                    {{detalles_seccion.forma_asiento}} (Actual)</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    {# Aquí también se podrían incluir los campos de Numeración y Posiciones si son parte de este mismo
+                    guardado #}
+                    <input class="save-button" type="submit" value="{{ button_save }}">
+            </form>
+        </article>
+    </fieldset>
 
-                <div class="form-elements-container">
-                    <label for="edit_position_increment_y" class="lbl-spacing">Incremento Y:</label>
-                    <input id="edit_position_increment_y" class="custom-input" type="number"
-                           name="edit_position_increment_y" autocomplete="off"
-                           value="{{ detalles_seccion.incremento_y }}">
-                </div>
+    <a id="return_button" href="{{ url_for('areas.detalle_zona_route', id_zona=detalles_seccion.id_zona) }}"
+        class="custom-button">
+        <i class="fas fa-arrow-left"></i></a>
 
-                <div class="form-elements-container">
-                    <label for="edit_seat_form" class="lbl-spacing">Forma asiento:</label>
-                    <select id="edit_seat_form" name="edit_seat_form" class="custom-input">
-                        <option value="{{detalles_seccion.forma_asiento}}">{{detalles_seccion.forma_asiento}}</option>
-                    </select>
-                </div>
-
-            </div>
-            <input class="save-button" type="submit" value="{{ button_save }}">
-        </form>
-    </article>
-</fieldset>
-
-<a id="return_button"
-   href="{{ url_for('detalle_zonas', id_zona=detalles_seccion.id_zona) }}"
-   class="custom-button">
-    <i class="fas fa-arrow-left"></i></a>
-
-{% endblock %}
+    {% endblock %}
