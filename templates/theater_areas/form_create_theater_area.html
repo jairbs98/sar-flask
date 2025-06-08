@@ -3,15 +3,17 @@
 {% block content_left %}
 <article class="details-container c3">
     <div>
+        {# La variable aquí es detalles_recinto, pero contiene detalles de la VERSIÓN del recinto #}
         <h1 class="custom-subtitle">{{ title_create_area }} {{ detalles_recinto.nombre_version_recinto }}</h1>
     </div>
-    <form action="{{ url_for('guardar_zona', id_version=detalles_recinto.id_version_recinto) }}" method="post"
-          enctype="multipart/form-data">
+    <form action="{{ url_for('areas.guardar_zona_route', id_version=detalles_recinto.id_version_recinto) }}"
+        method="post" enctype="multipart/form-data">
+        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="nombre_zona">{{ label_name }}</label>
                 <input id="nombre_zona" class="custom-input" type="text" name="nombre_zona"
-                       placeholder="{{ placeholder_name }}" autocomplete="off" required>
+                    placeholder="{{ placeholder_name }}" autocomplete="off" required>
             </div>
             <div class="form-elements-container">
                 <label for="area_color" class="lbl-spacing">{{ label_color }}</label>
@@ -23,8 +25,8 @@
 </article>
 
 <a id="return_button"
-   href="{{ url_for('detalle_version_recinto', version_id=detalles_recinto.id_version_recinto) }}"
-   class="custom-button">
+    href="{{ url_for('versions.detalle_version_route', version_id=detalles_recinto.id_version_recinto) }}"
+    class="custom-button">
     <i class="fas fa-arrow-left"></i></a>
 
 {% endblock %}

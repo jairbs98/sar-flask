@@ -1,27 +1,31 @@
 {% block content %}
 <article class="details-container c3">
     <h1 class="custom-subtitle">{{ title_detail }} {{ detalles_zona.nombre_zona }}</h1>
-    <form id="edit_form" action="{{ url_for('editar_zona', id_zona=detalles_zona.id_zona) }}" method="post">
+    <form id="edit_form" action="{{ url_for('areas.editar_zona_route', id_zona=detalles_zona.id_zona) }}" method="post">
+        {# Si tienes CSRF habilitado globalmente, añade {{ csrf_token() }} aquí #}
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_area_name" class="lbl-spacing">{{ label_name }}</label>
                 <input id="edit_area_name" class="custom-input" type="text" name="edit_area_name" autocomplete="off"
-                       value="{{ detalles_zona.nombre_zona }}" disabled>
+                    value="{{ detalles_zona.nombre_zona }}" disabled>
             </div>
 
             <div class="form-elements-container">
                 <label for="edit_area_color" class="lbl-spacing">{{ label_color }}</label>
                 <input id="edit_area_color" class="custom-color-input" type="color" name="edit_area_color"
-                       value="{{ detalles_zona.color_zona }}" disabled>
+                    value="{{ detalles_zona.color_zona }}" disabled>
             </div>
 
-            <label for="edit_status">{{ label_status }}</label>
+            <label for="edit_status">{{ label_status }}</label> {# Esta label parece fuera de un form-elements-container
+            #}
             <label class="switch">
-                <input id="edit_status" type="checkbox" name="edit_status" {% if detalles_zona.estatus_zona %} checked
-                       {% endif %} disabled>
+                <input id="edit_status" type="checkbox" name="edit_status_checkbox" {% if detalles_zona.estatus_zona %}
+                    checked {% endif %} disabled> {# Renombrado name para evitar conflicto con hidden #}
                 <span class="slider"></span>
             </label>
-            <input type="hidden" id="edit_status_hidden" name="edit_status" value="">
+            {# Este campo hidden es el que se debería usar para enviar el valor del switch #}
+            <input type="hidden" id="edit_status_hidden" name="edit_status_hidden"
+                value="{{ 'true' if detalles_zona.estatus_zona else 'false' }}">
 
             <input id="edit_button" class="save-button edit-button" type="submit" value="Guardar" disabled>
         </div>
@@ -31,16 +35,14 @@
     </div>
 
     <a id="return_button"
-       href="{{ url_for('detalle_version_recinto', version_id=detalles_zona.id_version_recinto) }}"
-       class="custom-button">
+        href="{{ url_for('versions.detalle_version_route', version_id=detalles_zona.id_version_recinto) }}"
+        class="custom-button">
         <i class="fas fa-arrow-left"></i></a>
-
 </article>
 
 <div>
-    <a id="theater_versions"
-       href="{{ url_for('crear_seccion', id_zona=detalles_zona.id_zona) }}"
-       class="return-button">{{ button_create_section }}</a>
+    <a id="create_section_button" {# ID más descriptivo #}
+        href="{{ url_for('sections.crear_seccion_form_route', id_zona=detalles_zona.id_zona) }}"
+        class="return-button">{{ button_create_section }}</a>
 </div>
-
 {% endblock %}

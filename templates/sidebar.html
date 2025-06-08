@@ -4,16 +4,16 @@
     </button>
     <ul class="sidebar-menu">
         <li>
-            <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='images/icon-theaters.svg') }}" alt="Icon"
-                    class="menu-icon">
+            {# Apunta al listado de recintos en el blueprint 'theater' #}
+            <a href="{{ url_for('theater.index') }}">
+                <img src="{{ url_for('static', filename='images/icon-theaters.svg') }}" alt="Icon" class="menu-icon">
                 <span class="menu-text">Recintos</span>
             </a>
         </li>
         <li>
-            <a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='images/icon-report.svg') }}" alt="Icon"
-                    class="menu-icon">
+            {# Apunta a la página de inicio en el blueprint 'main' #}
+            <a href="{{ url_for('main.home') }}">
+                <img src="{{ url_for('static', filename='images/icon-report.svg') }}" alt="Icon" class="menu-icon">
                 <span class="menu-text">Reportes</span>
             </a>
         </li>

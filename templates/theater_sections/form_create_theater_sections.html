@@ -5,37 +5,35 @@
     <div>
         <h1 class="custom-subtitle">{{ title_create_section }} {{ detalles_seccion.nombre_zona }}</h1>
     </div>
-    <form action="{{ url_for('guardar_seccion', id_zona=detalles_seccion.id_zona) }}" method="post"
-          enctype="multipart/form-data">
+    <form action="{{ url_for('sections.guardar_seccion_route', id_zona=detalles_seccion.id_zona) }}" method="post"
+        enctype="multipart/form-data">
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="nombre_seccion">{{ label_name }}</label>
                 <input id="nombre_seccion" class="custom-input" type="text" name="nombre_seccion"
-                       placeholder="{{ placeholder_name }}" autocomplete="off" required>
+                    placeholder="{{ placeholder_name }}" autocomplete="off" required>
             </div>
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="id_svg">{{ label_svg_id }}</label>
-                <input id="id_svg" class="custom-input" type="text" name="id_svg"
-                       placeholder="{{ placeholder_id_svg }}" autocomplete="off" required>
+                <input id="id_svg" class="custom-input" type="text" name="id_svg" placeholder="{{ placeholder_id_svg }}"
+                    autocomplete="off" required>
             </div>
             <div class="form-elements-container">
                 <label class="lbl-spacing" for="aforo_seccion">{{ label_capacity }}</label>
                 <input id="aforo_seccion" class="custom-input" type="number" name="aforo_seccion"
-                       placeholder="{{ placeholder_capacity }}" autocomplete="off" required>
+                    placeholder="{{ placeholder_capacity }}" autocomplete="off" required>
             </div>
             <input class="save-button" type="submit" value="{{ button_save }}">
         </div>
     </form>
 </article>
 
-<a id="return_button"
-   href="{{ url_for('detalle_zonas', id_zona=detalles_seccion.id_zona) }}"
-   class="custom-button">
+<a id="return_button" href="{{ url_for('areas.detalle_zona_route', id_zona=detalles_seccion.id_zona) }}"
+    class="custom-button">
     <i class="fas fa-arrow-left"></i></a>
-
 
 {% endblock %}
 
 {% block content_right %}
-<div id="preview-container" class="preview-container"></div>
+<div id="preview-container" class="preview-container"></div> {# ¿Se usa previsualización aquí? Si no, se puede quitar #}
 {% endblock %}
