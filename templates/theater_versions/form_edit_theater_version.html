@@ -4,7 +4,7 @@
     <form id="edit_form"
         action="{{ url_for('versions.editar_version_route', version_id=detalles_version_recinto.id_version_recinto) }}"
         method="post" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="horizontal-container">
             <div class="form-elements-container">
                 <label for="edit_name_version" class="lbl-spacing">{{ label_name }}</label>
@@ -14,8 +14,7 @@
             <div class="form-elements-container">
                 <label for="edit_svg_version" class="lbl-spacing">{{ label_svg }}</label>
                 <input id="edit_svg_version" class="custom-file-input" type="file" name="edit_svg_version" accept=".svg"
-                    {# El atributo value no funciona así para type="file" , el navegador lo controla por seguridad #}
-                    disabled>
+                    value="{{ detalles_version_recinto.svg_version_recinto }}" disabled>
             </div>
             <input id="edit_button" class="save-button edit-button" type="submit" value="{{ button_save }}" disabled>
         </div>

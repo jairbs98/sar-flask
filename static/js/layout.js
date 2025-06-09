@@ -2,17 +2,62 @@ $(document).ready(function () {
     $(".floating-notification").fadeIn().delay(2000).fadeOut();
 });
 
-document.getElementById('enable_edit_button').addEventListener('click', function () {
-    var inputs = document.getElementById('edit_form').getElementsByTagName('input');
-    var editButton = document.getElementById('edit_button');
+document.addEventListener('DOMContentLoaded', function () {
+    var enableEditButton = document.getElementById('enable_edit_button');
+    if (enableEditButton) {
+        enableEditButton.addEventListener('click', function () {
+            var form = document.getElementById('edit_form');
+            if (form) {
+                var inputs = form.getElementsByTagName('input');
+                var selects = form.getElementsByTagName('select');
+                var editButton = document.getElementById('edit_button');
 
-    for (var i = 0; i < inputs.length; i++) {
-        inputs[i].disabled = !inputs[i].disabled;
+                for (var i = 0; i < inputs.length; i++) {
+                    if (inputs[i].type !== 'hidden') {
+                        inputs[i].disabled = !inputs[i].disabled;
+                    }
+                }
+
+                for (var j = 0; j < selects.length; j++) {
+                    selects[j].disabled = !selects[j].disabled;
+                }
+
+                if (editButton) {
+                    editButton.classList.toggle('edit-button');
+                    editButton.classList.toggle('edit-button-visible');
+                }
+            }
+        });
     }
-    editButton.classList.toggle('edit-button');
-    editButton.classList.toggle('edit-button-visible');
+
+    var svgInput = document.getElementById('svg_recinto');
+    if (svgInput) {
+        svgInput.addEventListener('change', mostrarPrevisualizacion);
+    }
 });
 
+function mostrarPrevisualizacion() {
+    var input = document.getElementById('svg_recinto');
+    var previewContainer = document.getElementById('preview-container');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var previewObject = document.createElement('object');
+            previewObject.type = 'image/svg+xml';
+            previewObject.data = e.target.result;
+            previewObject.style.width = '100%';
+            previewObject.style.height = '100%';
+            previewContainer.innerHTML = '';
+            previewContainer.appendChild(previewObject);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        previewContainer.innerHTML = '';
+    }
+}
 
 function mostrarPrevisualizacion() {
     var input = document.getElementById('svg_recinto');
