@@ -3,23 +3,23 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var enableEditButton = document.getElementById('enable_edit_button');
+    const enableEditButton = document.getElementById('enable_edit_button');
     if (enableEditButton) {
         enableEditButton.addEventListener('click', function () {
-            var form = document.getElementById('edit_form');
+            const form = document.getElementById('edit_form');
             if (form) {
-                var inputs = form.getElementsByTagName('input');
-                var selects = form.getElementsByTagName('select');
-                var editButton = document.getElementById('edit_button');
+                const inputs = form.getElementsByTagName('input');
+                const selects = form.getElementsByTagName('select');
+                const editButton = document.getElementById('edit_button');
 
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].type !== 'hidden') {
-                        inputs[i].disabled = !inputs[i].disabled;
+                for (const input of inputs) {
+                    if (input.type !== 'hidden') {
+                        input.disabled = !input.disabled;
                     }
                 }
 
-                for (var j = 0; j < selects.length; j++) {
-                    selects[j].disabled = !selects[j].disabled;
+                for (const select of selects) {
+                    select.disabled = !select.disabled;
                 }
 
                 if (editButton) {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var svgInput = document.getElementById('svg_recinto');
+    const svgInput = document.getElementById('svg_recinto');
     if (svgInput) {
         svgInput.addEventListener('change', mostrarPrevisualizacion);
     }
