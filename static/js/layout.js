@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function mostrarPrevisualizacion() {
-    var input = document.getElementById('svg_recinto');
-    var previewContainer = document.getElementById('preview-container');
+    const input = document.getElementById('svg_recinto');
+    const previewContainer = document.getElementById('preview-container');
 
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        const reader = new FileReader();
 
         reader.onload = function (e) {
-            var previewObject = document.createElement('object');
+            const previewObject = document.createElement('object');
             previewObject.type = 'image/svg+xml';
             previewObject.data = e.target.result;
             previewObject.style.width = '100%';
@@ -79,16 +79,24 @@ function mostrarPrevisualizacion() {
     }
 }
 
-document.getElementById('downloadBtn').addEventListener('click', function () {
-    var svgContent = document.querySelector('.s-details-container-right svg').outerHTML;
-    var blob = new Blob([svgContent], { type: 'image/svg+xml' });
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'tu_archivo.svg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-});
+const downloadBtn = document.getElementById('downloadBtn');
+if (downloadBtn) {
+    downloadBtn.addEventListener('click', function () {
+        const svgElement = document.querySelector('.s-details-container-right svg');
+        if(svgElement) {
+            const svgContent = svgElement.outerHTML;
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'tu_archivo.svg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            alert("No se encontró ningún SVG para descargar.");
+        }
+    });
+}
 
 document.getElementById('openModalBtn').addEventListener('click', openModal);
 
@@ -110,10 +118,10 @@ window.addEventListener('click', function (event) {
 
 
 const checkbox = document.getElementById('edit_status');
-const hiddenField = document.getElementById('edit_status_hidden'); // Access the hidden field
+const hiddenField = document.getElementById('edit_status_hidden');
 
 checkbox.addEventListener('change', () => {
-    hiddenField.value = checkbox.checked ? 'true' : ''; // Set to 'true' or '' based on checked state
+    hiddenField.value = checkbox.checked ? 'true' : '';
 });
 
 const checkboxAxis = document.getElementById('edit_axis');
